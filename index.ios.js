@@ -14,6 +14,25 @@ import * as _ from 'lodash';
 
 import niv from './index2.js'
 
+const GoalImage = ({x, y, imageType}) => {
+  // console.warn({x, y, imageType})
+  let image;
+  const emptyImage = require('./img/plus_gray.png');
+  const undoneImage = require('./img/gray_play.png');
+  const completeImage = require("./img/golden_play.png");
+  if (imageType === 'empty') {
+    image = emptyImage
+  } else if (imageType == 'undone') {
+    image = undoneImage
+  } else {
+    image = completeImage
+  }
+  return (
+    <TouchableOpacity><Image style={{position : "absolute", height: height*0.09 ,width: height*0.09*1.4, top: y-(width*0.11), left: x-(width*0.066667)}}
+    source={image}/></TouchableOpacity>
+  )
+}
+
 const {height, width} = Dimensions.get('window')
 export default class legatiplay extends React.Component {
   constructor(props) {
@@ -46,7 +65,7 @@ export default class legatiplay extends React.Component {
           curvePoints : [{x: width*0.2, y: height*1.1},
                           {x: width*0.2, y: height*0.9}],
           targetPoint : {x: width*0.15+(width*0.067), y: height*0.78+(width*0.11)},
-          challenges : [ {id : 17, done: true, cordinate:{x: 1, y: 1}},{id : 17, done: true, cordinate:{x: 1, y: 1}},{id : 17, done: true, cordinate:{x: 1, y: 1}},{id : 17, done: true, cordinate:{x: 1, y: 1}}, {id : 18, done: true, cordinate:{x: 1, y: 1}}, {id : 19, done: true},{id : 20, done: true, cordinate:{x: 1, y: 1}}, {id : 21, done: true, cordinate:{x: 1, y: 1}} ],
+          challenges : [{id : 17, done: true, cordinate:{x: 1, y: 1}}, {id : 18, done: true, cordinate:{x: 1, y: 1}}, {id : 19, done: true},{id : 20, done: true, cordinate:{x: 1, y: 1}}, {id : 21, done: true, cordinate:{x: 1, y: 1}} ],
           challengeDimentions : 0
         },
         {
@@ -55,16 +74,16 @@ export default class legatiplay extends React.Component {
           initialPoint: {x: width*0.15+(width*0.067), y: height*0.78},
           curvePoints : [{x: width*0.55, y: height*0.78},
                           {x: width*0.7, y: height*0.65}],
-          targetPoint : {x: width*0.64+(width*0.067), y: height*0.52+(width*0.11)},
+          targetPoint : {x: width*0.55+(width*0.067), y: height*0.5+(width*0.11)},
           challenges : [ {id : 17, done: false, cordinate:{x: 1, y: 1}},{id : 17, done: false, cordinate:{x: 1, y: 1}}, {id : 18, done: false, cordinate:{x: 1, y: 1}}, {id : 19, done: false},{id : 20, done: false, cordinate:{x: 1, y: 1}}, {id : 21, done: false, cordinate:{x: 1, y: 1}} ],
           challengeDimentions : 0
         },
         {
           goalId : 5,
           goalStatus : "empty",
-          initialPoint: {x: width*0.64+(width*0.067), y: height*0.52},
-          curvePoints : [{x: width*0.35, y: height*0.52},
-                          {x: width*0.3, y: height*0.25}],
+          initialPoint: {x: width*0.55+(width*0.067), y: height*0.5},
+          curvePoints : [{x: width*0.3, y: height*0.52},
+                          {x: width*0.25, y: height*0.25}],
           targetPoint : {x: width*0.4+(width*0.067), y: height*0.16+(width*0.11)},
           challenges : [{id : 17, done: false, cordinate:{x: 1, y: 1}}, {id : 18, done: false, cordinate:{x: 1, y: 1}}, {id : 19, done: false},{id : 20, done: false, cordinate:{x: 1, y: 1}}, {id : 21, done: false, cordinate:{x: 1, y: 1}} ],
           challengeDimentions : 0
@@ -104,21 +123,23 @@ export default class legatiplay extends React.Component {
       <View>
         {this.state.goalList[goalNumber].challenges.map((challengePoint, index) => {
           let m = 0
+          let challengedimentions = this.state.goalList[goalNumber].challengeDimentions;
+         // degreeFinder(this.state.goalList[goalNumber],index,  )
             if(index!== this.state.goalList[goalNumber].challenges.length-1){
-            m =  Math.atan2((this.state.goalList[goalNumber].challenges[index+1].cordinate.y - (this.state.goalList[goalNumber].challengeDimentions*0.2)) - challengePoint.cordinate.y ,
-                                (this.state.goalList[goalNumber].challenges[index+1].cordinate.x - (this.state.goalList[goalNumber].challengeDimentions*0.2)) - challengePoint.cordinate.x) *  180 / Math.PI -110;
+            m =  Math.atan2((this.state.goalList[goalNumber].challenges[index+1].cordinate.y - (challengedimentions*0.2)) - challengePoint.cordinate.y ,
+                                (this.state.goalList[goalNumber].challenges[index+1].cordinate.x - (challengedimentions*0.2)) - challengePoint.cordinate.x) *  180 / Math.PI -110;
           } else {
             m = 250+ Math.atan2((this.state.goalList[goalNumber].targetPoint.y-20) - challengePoint.cordinate.y ,
                            (this.state.goalList[goalNumber].targetPoint.x-10) - challengePoint.cordinate.x) *  180 / Math.PI;
           }
           if(challengePoint.done==false){
             return (
-          <TouchableOpacity>
-          <Image style={{transform: [{rotate:`${180+m}deg`}],position : "absolute", height: this.state.goalList[goalNumber].challengeDimentions ,width: this.state.goalList[goalNumber].challengeDimentions, top: challengePoint.cordinate.y, left: challengePoint.cordinate.x}}
+                <TouchableOpacity>
+                <Image style={{transform: [{rotate:`${180+m}deg`}],position : "absolute", height: challengedimentions ,width: challengedimentions, top: challengePoint.cordinate.y, left: challengePoint.cordinate.x}}
                               source= {require('./img/challenge_gray.png')}/></TouchableOpacity>
           )} else{ return(
-              <TouchableOpacity>
-              <Image style={{transform: [{rotate:`${180+m}deg`}],position : "absolute", height: this.state.goalList[goalNumber].challengeDimentions ,width: this.state.goalList[goalNumber].challengeDimentions, top: challengePoint.cordinate.y, left: challengePoint.cordinate.x}}
+               <TouchableOpacity>
+               <Image style={{transform: [{rotate:`${180+m}deg`}],position : "absolute", height: challengedimentions ,width: challengedimentions, top: challengePoint.cordinate.y, left: challengePoint.cordinate.x}}
                               source= {require('./img/challenge_purple.png')}/></TouchableOpacity>
           )}
          
@@ -130,21 +151,9 @@ export default class legatiplay extends React.Component {
     return (
       <View>
         {this.state.goalList.map((goal, index) => {
-       if (goal.goalStatus == "undone"){
-          return (
-        <TouchableOpacity><Image style={{position : "absolute", height: height*0.09 ,width: height*0.09*1.4, top: goal.targetPoint.y-(width*0.11), left: goal.targetPoint.x-(width*0.066667)}}
-                              source= {require('./img/gray_play.png')}/></TouchableOpacity>
-        )}
-        if(goal.goalStatus == "done") {
-        return(
-         <TouchableOpacity><Image style={{position : "absolute", height: height*0.09 ,width: height*0.09*1.4, top: goal.targetPoint.y-(width*0.11), left: goal.targetPoint.x-(width*0.066667)}}
-                              source= {require('./img/golden_play.png')}/></TouchableOpacity>
-        )}
-        if(goal.goalStatus == "empty") {
-          return(
-         <TouchableOpacity><Image style={{position : "absolute", height: height*0.09 ,width: height*0.09*1.4, top: goal.targetPoint.y-(width*0.11), left: goal.targetPoint.x-(width*0.066667)}}
-                              source= {require('./img/plus_gray.png')}/></TouchableOpacity>
-        )} 
+         return (
+           <GoalImage x={goal.targetPoint.x} y={goal.targetPoint.y} imageType={goal.goalStatus}/>
+         )
        }
     )}
     </View>
@@ -172,6 +181,21 @@ export default class legatiplay extends React.Component {
     }
     this.setState({goalList: newGoalList})
   }
+
+  clouds(){
+    let i = 10
+    let clouds = []
+    while(i<128) {
+      clouds.push((
+        <View>
+          <Image style={{marginTop:height*(i/100), marginLeft:-height*0.13, height:height*0.35, width:height*0.35*2.37 , position: 'absolute'}} source={require('./img/threeClouds.png')}/>  
+        </View>
+      )) 
+    i = i+ 15
+    }
+    return clouds
+      
+  }
   
       
   render() {
@@ -185,6 +209,8 @@ export default class legatiplay extends React.Component {
         {this.printChallnges(3)}
         {this.printChallnges(4)}
         {this.printGoals()}
+        {this.clouds()}
+
       </ScrollView>
     ); 
 

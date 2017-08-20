@@ -20,9 +20,8 @@ export default class ChallengesPage extends React.Component {
     this.state = {
       challengesPoints: [
         {done:true},
-        {done:true},
-        {done:true},
-        {done:true},
+        {done:false},
+        {done:false},
         {done:true},
         {done:true},
         {done:true}
@@ -62,7 +61,7 @@ export default class ChallengesPage extends React.Component {
                    } else {
                     return (
                       <TouchableOpacity onPress={() =>{if(index!=challengeIndex + 1) this.swiper.scrollBy((challengeIndex+1)-index, true)}}>
-                                <Image style={{ marginHorizontal:this.state.challengeDimentions*0.3, width:this.state.challengeDimentions, height:this.state.challengeDimentions}}
+                                <Image style={{marginHorizontal:this.state.challengeDimentions*0.3, width:this.state.challengeDimentions, height:this.state.challengeDimentions}}
                               source= {require('./img/challenge_purple.png')}/>
                       </TouchableOpacity>  )
                    }

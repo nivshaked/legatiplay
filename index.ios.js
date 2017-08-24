@@ -7,14 +7,15 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
+  TouchableHighlight,
   View,
   Dimensions
 } from 'react-native';
 import * as _ from 'lodash';
-
+import Modal from 'react-native-modal'
 import niv from './index2.js'
 
-const GoalImage = ({x, y, imageType}) => {
+const GoalImage = ({x, y, imageType, chooseGoal, openGoal}) => {
   // console.warn({x, y, imageType})
   let image;
   const emptyImage = require('./img/plus_gray.png');
@@ -22,14 +23,18 @@ const GoalImage = ({x, y, imageType}) => {
   const completeImage = require("./img/golden_play.png");
   if (imageType === 'empty') {
     image = emptyImage
+    pressFunction=chooseGoal
   } else if (imageType == 'undone') {
     image = undoneImage
+    pressFunction=openGoal
   } else {
     image = completeImage
+    pressFunction=openGoal
   }
   return (
-    <TouchableOpacity><Image style={{position : "absolute", height: height*0.09 ,width: height*0.09*1.4, top: y-(width*0.11), left: x-(width*0.066667)}}
-    source={image}/></TouchableOpacity>
+    <View style={{position : "absolute", zIndex: 3, height: height*0.09 ,width: height*0.09*1.4, top: y-(width*0.11), left: x-(width*0.066667)}}>
+    <TouchableOpacity onPress={pressFunction}><Image style = {{height: height*0.09 ,width: height*0.09*1.4}}
+    source={image}/></TouchableOpacity></View>
   )
 }
 
@@ -39,64 +44,74 @@ export default class legatiplay extends React.Component {
     super(props);
     this.state = {
       testKit : 1,
+      isModalVisible: false,      
       goalList : [
         {
           goalId : 1,
           goalStatus : "done",
           initialPoint: {x: width*0.1+(width*0.15), y: height*1.85},
           curvePoints : [{x: width*0.5, y: height*1.8},
-                         {x: width*0.6, y: height*1.6}],
+                         {x: width*0.6, y: height*1.65}],
           targetPoint : {x: width*0.3+(width*0.15), y: height*1.5+40},
-          challenges : [{id : 11, done: true, cordinate:{x: 1, y: 1}},{id : 11, done: true, cordinate:{x: 1, y: 1}}, {id : 12, done: true, cordinate:{x: 1, y: 1}}, {id : 13, done: true, cordinate:{x: 1, y: 1}}, {id : 14, done: true, cordinate:{x: 1, y: 1}} ]
+          challenges : [{id : 18, done: false, cordinate:{x: 1, y: 1}},{id : 18, done: false, cordinate:{x: 1, y: 1}},{id : 18, done: false, cordinate:{x: 1, y: 1}},{id : 11, done: true, cordinate:{x: 1, y: 1}},{id : 11, done: true, cordinate:{x: 1, y: 1}}, {id : 12, done: true, cordinate:{x: 1, y: 1}}, {id : 13, done: true, cordinate:{x: 1, y: 1}}, {id : 14, done: true, cordinate:{x: 1, y: 1}} ]
         }, 
         {
           goalId : 2,
           goalStatus : "done",
           initialPoint: {x: width*0.35+(width*0.067), y: height*1.5},
           curvePoints : [{x: width*0.5, y: height*1.4},
-                         {x: width*0.6, y: height*1.25}],
+                         {x: width*0.6, y: height*1.28}],
           targetPoint : {x: width*0.45+(width*0.067), y: height*1.12+(width*0.11)},
-          challenges : [{id : 10, done: true, cordinate:{x: 1, y: 1}}, {id : 11, done: true, cordinate:{x: 1, y: 1}}, {id : 12, done: true, cordinate:{x: 1, y: 1}}, {id : 13, done: true, cordinate:{x: 1, y: 1}}, {id : 14, done: true, cordinate:{x: 1, y: 1}} ]
+          challenges : [{id : 18, done: false, cordinate:{x: 1, y: 1}},{id : 18, done: false, cordinate:{x: 1, y: 1}},{id : 18, done: false, cordinate:{x: 1, y: 1}},{id : 10, done: true, cordinate:{x: 1, y: 1}}, {id : 11, done: true, cordinate:{x: 1, y: 1}}, {id : 12, done: true, cordinate:{x: 1, y: 1}}, {id : 13, done: true, cordinate:{x: 1, y: 1}}, {id : 14, done: true, cordinate:{x: 1, y: 1}} ]
         }, 
         {
           goalId : 3,
           goalStatus : "undone",
           initialPoint: {x: width*0.45+(width*0.067), y: height*1.12},
           curvePoints : [{x: width*0.2, y: height*1.1},
-                          {x: width*0.2, y: height*0.9}],
+                          {x: width*0.2, y: height*0.92}],
           targetPoint : {x: width*0.15+(width*0.067), y: height*0.78+(width*0.11)},
-          challenges : [{id : 17, done: true, cordinate:{x: 1, y: 1}}, {id : 18, done: true, cordinate:{x: 1, y: 1}}, {id : 19, done: true},{id : 20, done: true, cordinate:{x: 1, y: 1}}, {id : 21, done: true, cordinate:{x: 1, y: 1}} ],
+          challenges : [{id : 18, done: false, cordinate:{x: 1, y: 1}},{id : 18, done: false, cordinate:{x: 1, y: 1}},{id : 18, done: false, cordinate:{x: 1, y: 1}},{id : 17, done: true, cordinate:{x: 1, y: 1}}, {id : 18, done: true, cordinate:{x: 1, y: 1}}, {id : 19, done: true},{id : 20, done: true, cordinate:{x: 1, y: 1}}, {id : 21, done: true, cordinate:{x: 1, y: 1}} ],
           challengeDimentions : 0
         },
         {
           goalId : 4,
           goalStatus : "empty",
-          initialPoint: {x: width*0.15+(width*0.067), y: height*0.78},
-          curvePoints : [{x: width*0.55, y: height*0.78},
-                          {x: width*0.7, y: height*0.65}],
-          targetPoint : {x: width*0.55+(width*0.067), y: height*0.5+(width*0.11)},
-          challenges : [ {id : 17, done: false, cordinate:{x: 1, y: 1}},{id : 17, done: false, cordinate:{x: 1, y: 1}}, {id : 18, done: false, cordinate:{x: 1, y: 1}}, {id : 19, done: false},{id : 20, done: false, cordinate:{x: 1, y: 1}}, {id : 21, done: false, cordinate:{x: 1, y: 1}} ],
+          initialPoint: {x: width*0.2+(width*0.067), y: height*0.78},
+          curvePoints : [{x: width*0.53, y: height*0.8},
+                          {x: width*0.65, y: height*0.64}],
+          targetPoint : {x: width*0.5+(width*0.067), y: height*0.5+(width*0.11)},
+          challenges : [{id : 18, done: false, cordinate:{x: 1, y: 1}},{id : 18, done: false, cordinate:{x: 1, y: 1}},{id : 18, done: false, cordinate:{x: 1, y: 1}},{id : 18, done: false, cordinate:{x: 1, y: 1}}, {id : 19, done: false},{id : 20, done: false, cordinate:{x: 1, y: 1}}, {id : 21, done: false, cordinate:{x: 1, y: 1}} ],
           challengeDimentions : 0
         },
         {
           goalId : 5,
           goalStatus : "empty",
-          initialPoint: {x: width*0.55+(width*0.067), y: height*0.5},
-          curvePoints : [{x: width*0.3, y: height*0.52},
-                          {x: width*0.25, y: height*0.25}],
+          initialPoint: {x: width*0.5+(width*0.067), y: height*0.5},
+          curvePoints : [{x: width*0.25, y: height*0.5},
+                          {x: width*0.2, y: height*0.25}],
           targetPoint : {x: width*0.4+(width*0.067), y: height*0.16+(width*0.11)},
-          challenges : [{id : 17, done: false, cordinate:{x: 1, y: 1}}, {id : 18, done: false, cordinate:{x: 1, y: 1}}, {id : 19, done: false},{id : 20, done: false, cordinate:{x: 1, y: 1}}, {id : 21, done: false, cordinate:{x: 1, y: 1}} ],
+          challenges : [{id : 18, done: false, cordinate:{x: 1, y: 1}},{id : 18, done: false, cordinate:{x: 1, y: 1}},{id : 18, done: false, cordinate:{x: 1, y: 1}},{id : 17, done: false, cordinate:{x: 1, y: 1}}, {id : 18, done: false, cordinate:{x: 1, y: 1}}, {id : 19, done: false},{id : 20, done: false, cordinate:{x: 1, y: 1}}, {id : 21, done: false, cordinate:{x: 1, y: 1}} ],
           challengeDimentions : 0
         }
       ]
     }
+    this._showModal = this._showModal.bind(this)
+    this._hideModal = this._hideModal.bind(this)
+    this.openGoal = this.openGoal.bind(this)    
     
   }
   componentWillMount(){
     this.createChallengePoints()
   } 
-
- componentDidMount(){
+  _showModal(){
+    this.setState({isModalVisible:true})
+  }
+  _hideModal(){
+    this.setState({isModalVisible:false})
+  } 
+  openGoal(){
+    console.warn("Goal opens")
   }
   setDimentions(x) {
         let challengeDimentions = 0.11*width;
@@ -134,13 +149,13 @@ export default class legatiplay extends React.Component {
           }
           if(challengePoint.done==false){
             return (
-                <TouchableOpacity>
-                <Image style={{transform: [{rotate:`${180+m}deg`}],position : "absolute", height: challengedimentions ,width: challengedimentions, top: challengePoint.cordinate.y, left: challengePoint.cordinate.x}}
-                              source= {require('./img/challenge_gray.png')}/></TouchableOpacity>
+                <View style={{transform: [{rotate:`${180+m}deg`}],position : "absolute", height: challengedimentions ,width: challengedimentions, top: challengePoint.cordinate.y, left: challengePoint.cordinate.x}} ><TouchableOpacity key={(1 + index) + (10 * goalNumber)}>
+                <Image style={{height: challengedimentions ,width: challengedimentions}}
+                              source= {require('./img/challenge_gray.png')}/></TouchableOpacity></View>
           )} else{ return(
-               <TouchableOpacity>
-               <Image style={{transform: [{rotate:`${180+m}deg`}],position : "absolute", height: challengedimentions ,width: challengedimentions, top: challengePoint.cordinate.y, left: challengePoint.cordinate.x}}
-                              source= {require('./img/challenge_purple.png')}/></TouchableOpacity>
+              <View style={{transform: [{rotate:`${180+m}deg`}],position : "absolute", height: challengedimentions ,width: challengedimentions, top: challengePoint.cordinate.y, left: challengePoint.cordinate.x}}><TouchableOpacity key={(1 + index) + (10 * goalNumber)}>
+               <Image style={{height: challengedimentions ,width: challengedimentions}}
+                              source= {require('./img/challenge_purple.png')}/></TouchableOpacity></View>
           )}
          
     })}
@@ -152,7 +167,7 @@ export default class legatiplay extends React.Component {
       <View>
         {this.state.goalList.map((goal, index) => {
          return (
-           <GoalImage x={goal.targetPoint.x} y={goal.targetPoint.y} imageType={goal.goalStatus}/>
+           <GoalImage key={(index + 1) * 1000} x={goal.targetPoint.x} y={goal.targetPoint.y} imageType={goal.goalStatus} chooseGoal={this._showModal} openGoal={this.openGoal}/>
          )
        }
     )}
@@ -181,7 +196,6 @@ export default class legatiplay extends React.Component {
     }
     this.setState({goalList: newGoalList})
   }
-
   clouds(){
     let i = 10
     let clouds = []
@@ -209,8 +223,24 @@ export default class legatiplay extends React.Component {
         {this.printChallnges(3)}
         {this.printChallnges(4)}
         {this.printGoals()}
-        {this.clouds()}
+        {/* {this.clouds()} */}
 
+        <Modal style={{alignItems:'center'}} isVisible={this.state.isModalVisible} onBackdropPress={this._hideModal}>
+          <View style={{}} style={{borderRadius:15, flex:0, flexWrap:'wrap' ,flexDirection:'row-reverse', justifyContent: 'flex-start',padding:((width*0.88)-(width/4.1*3))/8, paddingVertical:20, backgroundColor:'white', height:width*1.3, width:width*0.88}}>
+            <View style={styles.goalPick}><Text style={{color:'rgb(80,80,80)', fontFamily: 'Rubik', alignSelf:'center', textAlign:'center'}}>פרח נתתי לנורית</Text></View>
+            <View style={styles.goalPick}><Text style={{color:'rgb(80,80,80)', fontFamily: 'Rubik', alignSelf:'center', textAlign:'center'}}>לא עוזב את העיר</Text></View>
+            <View style={styles.goalPick}><Text style={{color:'rgb(80,80,80)', fontFamily: 'Rubik', alignSelf:'center', textAlign:'center'}}>תמי יחכו לך תמיד יחכוד</Text></View>
+            <View style={styles.goalPick}><Text style={{color:'rgb(80,80,80)', fontFamily: 'Rubik', alignSelf:'center', textAlign:'center'}}>תמי יחכו לך תמיד יחכוד</Text></View>
+            <View style={styles.goalPick}><Text style={{color:'rgb(80,80,80)', fontFamily: 'Rubik', alignSelf:'center', textAlign:'center'}}>תמי יחכו לך תמיד יחכוד</Text></View>
+            <View style={styles.goalPick}><Text style={{color:'rgb(80,80,80)', fontFamily: 'Rubik', alignSelf:'center', textAlign:'center'}}>תמי יחכו לך תמיד יחכוד</Text></View>
+            <View style={styles.goalPick}><Text style={{color:'rgb(80,80,80)', fontFamily: 'Rubik', alignSelf:'center', textAlign:'center'}}>תמי יחכו לך תמיד יחכוד</Text></View>
+            <View style={styles.goalPick}><Text style={{color:'rgb(80,80,80)', fontFamily: 'Rubik', alignSelf:'center', textAlign:'center'}}>תמי יחכו לך תמיד יחכוד</Text></View>
+            <View style={styles.goalPick}><Text style={{color:'rgb(80,80,80)', fontFamily: 'Rubik', alignSelf:'center', textAlign:'center'}}>תמי יחכו לך תמיד יחכוד</Text></View>
+            <View style={styles.goalPick}><Text style={{color:'rgb(80,80,80)', fontFamily: 'Rubik', alignSelf:'center', textAlign:'center'}}>תמי יחכו לך תמיד יחכוד</Text></View>
+            <View style={styles.goalPick}><Text style={{color:'rgb(80,80,80)', fontFamily: 'Rubik', alignSelf:'center', textAlign:'center'}}>תמי יחכו לך תמיד יחכוד</Text></View>
+            <TouchableOpacity onPress={this._hideModal} style={{position:'absolute', left:width*0.44- 12, top:width*1.3*0.92}}><Text style={{color:'rgb(80,80,80)', fontFamily: 'Rubik', fontSize:width*0.045}}>סגור</Text></TouchableOpacity>
+          </View>
+        </Modal>
       </ScrollView>
     ); 
 
@@ -220,16 +250,23 @@ export default class legatiplay extends React.Component {
 const styles = StyleSheet.create({
   container: {
     backgroundColor:'#fff',
-    height: height*2 - 70
-  },
+    height: height*2 - 70  },
   goal : {
     position : "absolute",
     backgroundColor: 'red',
     height: 40,
     width: 40
   },
-  challenge : {
-    
+  goalPick:{
+    backgroundColor:'rgb(245, 245, 245)',
+    borderRadius:100,
+    borderColor:'rgb(180,180,180)',
+    borderWidth:1,
+    margin:((width*0.88)-(width/4.1*3))/8,
+    height:width/4.1,
+    width:width/4.1,
+    alignContent:'center',
+    justifyContent:'center'
   },
   backgroundImage: {
     position: "absolute",

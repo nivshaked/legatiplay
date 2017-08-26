@@ -53,7 +53,7 @@ export default class legatiplay extends React.Component {
           curvePoints : [{x: width*0.5, y: height*1.8},
                          {x: width*0.6, y: height*1.65}],
           targetPoint : {x: width*0.3+(width*0.15), y: height*1.5+40},
-          challenges : [{id : 18, done: false, cordinate:{x: 1, y: 1}},{id : 18, done: false, cordinate:{x: 1, y: 1}},{id : 18, done: false, cordinate:{x: 1, y: 1}},{id : 11, done: true, cordinate:{x: 1, y: 1}},{id : 11, done: true, cordinate:{x: 1, y: 1}}, {id : 12, done: true, cordinate:{x: 1, y: 1}}, {id : 13, done: true, cordinate:{x: 1, y: 1}}, {id : 14, done: true, cordinate:{x: 1, y: 1}} ]
+          challenges : [{id : 11, done: true, cordinate:{x: 1, y: 1}},{id : 11, done: true, cordinate:{x: 1, y: 1}}, {id : 12, done: true, cordinate:{x: 1, y: 1}}, {id : 13, done: true, cordinate:{x: 1, y: 1}}, {id : 14, done: true, cordinate:{x: 1, y: 1}} ]
         }, 
         {
           goalId : 2,
@@ -62,7 +62,7 @@ export default class legatiplay extends React.Component {
           curvePoints : [{x: width*0.5, y: height*1.4},
                          {x: width*0.6, y: height*1.28}],
           targetPoint : {x: width*0.45+(width*0.067), y: height*1.12+(width*0.11)},
-          challenges : [{id : 18, done: false, cordinate:{x: 1, y: 1}},{id : 18, done: false, cordinate:{x: 1, y: 1}},{id : 18, done: false, cordinate:{x: 1, y: 1}},{id : 10, done: true, cordinate:{x: 1, y: 1}}, {id : 11, done: true, cordinate:{x: 1, y: 1}}, {id : 12, done: true, cordinate:{x: 1, y: 1}}, {id : 13, done: true, cordinate:{x: 1, y: 1}}, {id : 14, done: true, cordinate:{x: 1, y: 1}} ]
+          challenges : [{id : 10, done: true, cordinate:{x: 1, y: 1}}, {id : 11, done: true, cordinate:{x: 1, y: 1}}, {id : 12, done: true, cordinate:{x: 1, y: 1}}, {id : 13, done: true, cordinate:{x: 1, y: 1}}, {id : 14, done: true, cordinate:{x: 1, y: 1}} ]
         }, 
         {
           goalId : 3,
@@ -71,7 +71,7 @@ export default class legatiplay extends React.Component {
           curvePoints : [{x: width*0.2, y: height*1.1},
                           {x: width*0.2, y: height*0.92}],
           targetPoint : {x: width*0.15+(width*0.067), y: height*0.78+(width*0.11)},
-          challenges : [{id : 18, done: false, cordinate:{x: 1, y: 1}},{id : 18, done: false, cordinate:{x: 1, y: 1}},{id : 18, done: false, cordinate:{x: 1, y: 1}},{id : 17, done: true, cordinate:{x: 1, y: 1}}, {id : 18, done: true, cordinate:{x: 1, y: 1}}, {id : 19, done: true},{id : 20, done: true, cordinate:{x: 1, y: 1}}, {id : 21, done: true, cordinate:{x: 1, y: 1}} ],
+          challenges : [{id : 17, done: true, cordinate:{x: 1, y: 1}}, {id : 18, done: true, cordinate:{x: 1, y: 1}}, {id : 19, done: true},{id : 20, done: true, cordinate:{x: 1, y: 1}}, {id : 21, done: true, cordinate:{x: 1, y: 1}} ],
           challengeDimentions : 0
         },
         {
@@ -81,7 +81,7 @@ export default class legatiplay extends React.Component {
           curvePoints : [{x: width*0.53, y: height*0.8},
                           {x: width*0.65, y: height*0.64}],
           targetPoint : {x: width*0.5+(width*0.067), y: height*0.5+(width*0.11)},
-          challenges : [{id : 18, done: false, cordinate:{x: 1, y: 1}},{id : 18, done: false, cordinate:{x: 1, y: 1}},{id : 18, done: false, cordinate:{x: 1, y: 1}},{id : 18, done: false, cordinate:{x: 1, y: 1}}, {id : 19, done: false},{id : 20, done: false, cordinate:{x: 1, y: 1}}, {id : 21, done: false, cordinate:{x: 1, y: 1}} ],
+          challenges : [{id : 18, done: false, cordinate:{x: 1, y: 1}},{id : 18, done: false, cordinate:{x: 1, y: 1}}, {id : 19, done: false},{id : 20, done: false, cordinate:{x: 1, y: 1}}, {id : 21, done: false, cordinate:{x: 1, y: 1}} ],
           challengeDimentions : 0
         },
         {
@@ -91,7 +91,7 @@ export default class legatiplay extends React.Component {
           curvePoints : [{x: width*0.25, y: height*0.5},
                           {x: width*0.2, y: height*0.25}],
           targetPoint : {x: width*0.4+(width*0.067), y: height*0.16+(width*0.11)},
-          challenges : [{id : 18, done: false, cordinate:{x: 1, y: 1}},{id : 18, done: false, cordinate:{x: 1, y: 1}},{id : 18, done: false, cordinate:{x: 1, y: 1}},{id : 17, done: false, cordinate:{x: 1, y: 1}}, {id : 18, done: false, cordinate:{x: 1, y: 1}}, {id : 19, done: false},{id : 20, done: false, cordinate:{x: 1, y: 1}}, {id : 21, done: false, cordinate:{x: 1, y: 1}} ],
+          challenges : [{id : 18, done: false, cordinate:{x: 1, y: 1}},{id : 17, done: false, cordinate:{x: 1, y: 1}}, {id : 18, done: false, cordinate:{x: 1, y: 1}}, {id : 19, done: false},{id : 20, done: false, cordinate:{x: 1, y: 1}}, {id : 21, done: false, cordinate:{x: 1, y: 1}} ],
           challengeDimentions : 0
         }
       ]
@@ -226,7 +226,7 @@ export default class legatiplay extends React.Component {
         {/* {this.clouds()} */}
 
         <Modal style={{alignItems:'center'}} isVisible={this.state.isModalVisible} onBackdropPress={this._hideModal}>
-          <View style={{}} style={{borderRadius:15, flex:0, flexWrap:'wrap' ,flexDirection:'row-reverse', justifyContent: 'flex-start',padding:((width*0.88)-(width/4.1*3))/8, paddingVertical:20, backgroundColor:'white', height:width*1.3, width:width*0.88}}>
+          <View style={{}} style={{borderRadius:15, flex:0, flexWrap:'wrap' ,flexDirection:'row-reverse', justifyContent: 'flex-start',padding:((width*0.88)-(width/4.1*3))/8, paddingVertical:20, backgroundColor:'rgba(225,225,225, 0.85)', height:width*1.3, width:width*0.88}}>
             <View style={styles.goalPick}><Text style={{color:'rgb(80,80,80)', fontFamily: 'Rubik', alignSelf:'center', textAlign:'center'}}>פרח נתתי לנורית</Text></View>
             <View style={styles.goalPick}><Text style={{color:'rgb(80,80,80)', fontFamily: 'Rubik', alignSelf:'center', textAlign:'center'}}>לא עוזב את העיר</Text></View>
             <View style={styles.goalPick}><Text style={{color:'rgb(80,80,80)', fontFamily: 'Rubik', alignSelf:'center', textAlign:'center'}}>תמי יחכו לך תמיד יחכוד</Text></View>
@@ -278,4 +278,4 @@ const styles = StyleSheet.create({
 });
 
 
-AppRegistry.registerComponent('legatiplay', () => legatiplay);
+AppRegistry.registerComponent('legatiplay', () => niv);

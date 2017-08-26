@@ -12,6 +12,8 @@ import {
 } from 'react-native';
 import Swiper from 'react-native-swiper';
 import Icon from 'react-native-vector-icons/MaterialIcons'
+import Modal from 'react-native-modal'
+
 
 
 
@@ -29,10 +31,15 @@ export default class ChallengesPage extends React.Component {
         {done:true}
       ],
       challengeDimentions : 25,
-      goalDimentions : 35
+      goalDimentions : 35,
+      isModalVisible: false      
     }
     this.renderPagination = this.renderPagination.bind(this)
     this.setProgressBarDimentions = this.setProgressBarDimentions.bind(this)
+    this._showModal = this._showModal.bind(this)
+    this._hideModal = this._hideModal.bind(this)
+    this.barPresent = this.barPresent.bind(this)    
+    
   }
   
     componentWillMount(){
@@ -74,12 +81,51 @@ export default class ChallengesPage extends React.Component {
     )
 
     }
-
+    
     setProgressBarDimentions(x) {
         const variable = 1-(x*0.05)
         const challengeDimentions= width*0.09*variable ;
         this.setState({challengeDimentions});
     }
+    _showModal(){
+      this.setState({isModalVisible:true})
+    }
+    _hideModal(){
+      this.setState({isModalVisible:false})
+    } 
+    barPresent(barChords){
+      if (Array.isArray(barChords)) {
+        return barChords.map((chord) => {
+          return(
+            <Text style={{flex:1, fontSize: (barChords.length <= 2) ? width*0.06 : width*0.04}}> {chord}</Text>
+          )
+        })
+      } else { 
+        return ( 
+          <Text style={{flex:1, fontSize:width*0.06}}> {barChords}</Text>
+        )
+      }
+    }
+
+    chordsWriter(chords, rowBreachEach){
+      return(
+         <View style={{flexWrap:'wrap', flex: 1, flexDirection: 'row' ,width:width*0.8, marginTop:width*0.05}}>
+             {chords.map((bar, index) => {
+               if(index === chords.length-1 || Number.isInteger((index+1)/rowBreachEach)) { 
+                 return (
+                  <View style={[styles.bar, {borderRightWidth:1,width:(width*0.8)/rowBreachEach}]}>
+                     {this.barPresent(bar)}
+                  </View>
+                )
+              } else { return(
+                <View style={[styles.bar, {width:(width*0.8)/rowBreachEach}]}>
+                    {this.barPresent(bar)}
+                </View>
+              )}
+      })}
+     </View>
+    )}
+
     render() {
     return (
 
@@ -96,8 +142,10 @@ export default class ChallengesPage extends React.Component {
           </View>
           <View style={styles.content}>
               <View style={styles.notes}>
-                 <Image style={{height:35, width:48, position:'absolute', top:-17, left:(width*0.425)-24}} source= {require('./img/note_purple.png')}/>  
-                  <Text style={{fontSize: height*0.025, textAlign:'center'}}>| Am       | Em         | F           | G          | {"\n"}| F           |      %      | G          |      %     |</Text>
+                  {this.chordsWriter([['A', 'D'],['A', 'B'],['C','G'],['D'], 'F', 'Gm'], 3)}
+                  <View style={styles.iconContainer}>
+                    <Image style={{alignSelf:'center', height:31, width:28}} source= {require('./img/purple_note.png')}/>
+                  </View>
               </View>
           </View>
        
@@ -115,7 +163,7 @@ export default class ChallengesPage extends React.Component {
           <View style={styles.content}>
               <View style={styles.notes}>
                  <Image style={{height:35, width:48, position:'absolute', top:-17, left:(width*0.425)-24}} source= {require('./img/note_purple.png')}/>  
-                  <Text style={{fontSize: height*0.025, textAlign:'center'}}>| Am       | Em         | F           | G          | {"\n"}| F           |      %      | G          |      %     |</Text>
+                  <Text style={{fontSize: height*0.025, textAlign:'center'}}>| Am       | Em         | F           | G          | {"\n"}| F           |       %           |  G           |      %     |</Text>
               </View>
           </View>
        
@@ -181,7 +229,11 @@ export default class ChallengesPage extends React.Component {
           <View style={styles.space}></View>
           <View style={styles.content}>
            <View style={styles.notes}>
-              <TouchableOpacity ><Image style={{flex:1, width: width*0.83}} source= {require('./img/somewhere.jpg')}/></TouchableOpacity> 
+              <TouchableOpacity onPress={this._showModal} ><Image style={{flex:1, width: width*0.83}} source= {require('./img/somewhere.jpg')}/></TouchableOpacity> 
+                <Modal style={{alignItems:'center',justifyContent:'center'}} isVisible={this.state.isModalVisible} backdropOpacity={0.98}>
+                      <TouchableOpacity style={{position:'absolute', top:10, left:10}} onPress={this._hideModal} ><Text paddingHorizontal style={{color:'white', fontSize:15}}>סגור</Text></TouchableOpacity>
+                      <Image style={{resizeMode:'contain' ,width: width}} source= {require('./img/somewhere.jpg')}/>
+                </Modal>
               <View style={styles.iconContainer}>
                 <Image style={{alignSelf:'center', height:31, width:28}} source= {require('./img/purple_note.png')}/>
               </View>
@@ -281,6 +333,15 @@ const styles = StyleSheet.create({
         height: width*0.12,
         width: width*0.168,
         marginHorizontal:8
+    },
+    bar: {
+      marginTop:width*0.035,
+      flex:0,
+      flexDirection: 'row',
+      alignItems:'center',
+      borderLeftWidth:1,
+      borderColor:'black',
+      height:30
     }
   
 });

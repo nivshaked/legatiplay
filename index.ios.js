@@ -32,7 +32,7 @@ const GoalImage = ({x, y, imageType, chooseGoal, openGoal}) => {
     pressFunction=openGoal
   }
   return (
-    <View style={{position : "absolute", zIndex: 3, height: height*0.09 ,width: height*0.09*1.4, top: y-(width*0.11), left: x-(width*0.066667)}}>
+    <View style={{position : "absolute", zIndex: 3, height: height*0.09 ,width: height*0.09*1.4, bottom: y, left: x-(width*0.066667)}}>
     <TouchableOpacity onPress={pressFunction}><Image style = {{height: height*0.09 ,width: height*0.09*1.4}}
     source={image}/></TouchableOpacity></View>
   )
@@ -49,48 +49,48 @@ export default class legatiplay extends React.Component {
         {
           goalId : 1,
           goalStatus : "done",
-          initialPoint: {x: width*0.1+(width*0.15), y: height*1.85},
-          curvePoints : [{x: width*0.5, y: height*1.8},
-                         {x: width*0.6, y: height*1.65}],
-          targetPoint : {x: width*0.3+(width*0.15), y: height*1.5+40},
+          initialPoint: {x: width*0.1+(width*0.15), y: width*0.05},
+          curvePoints : [{x: width*0.45, y: height*0.08},
+                         {x: width*0.55, y: height*0.15}],
+          targetPoint : {x: width*0.3+(width*0.15), y: height*0.3},
           challenges : [{id : 11, done: true, cordinate:{x: 1, y: 1}},{id : 11, done: true, cordinate:{x: 1, y: 1}}, {id : 12, done: true, cordinate:{x: 1, y: 1}}, {id : 13, done: true, cordinate:{x: 1, y: 1}}, {id : 14, done: true, cordinate:{x: 1, y: 1}} ]
         }, 
         {
           goalId : 2,
           goalStatus : "done",
-          initialPoint: {x: width*0.35+(width*0.067), y: height*1.5},
-          curvePoints : [{x: width*0.5, y: height*1.4},
-                         {x: width*0.6, y: height*1.28}],
-          targetPoint : {x: width*0.45+(width*0.067), y: height*1.12+(width*0.11)},
+          initialPoint: {x: width*0.35+(width*0.067), y: height*0.3+(width*0.11)},
+          curvePoints : [{x: width*0.4, y: height*0.45},
+                         {x: width*0.6, y: height*0.56}],
+          targetPoint : {x: width*0.45+(width*0.067), y: height*0.68},
           challenges : [{id : 10, done: true, cordinate:{x: 1, y: 1}}, {id : 11, done: true, cordinate:{x: 1, y: 1}}, {id : 12, done: true, cordinate:{x: 1, y: 1}}, {id : 13, done: true, cordinate:{x: 1, y: 1}}, {id : 14, done: true, cordinate:{x: 1, y: 1}} ]
         }, 
         {
           goalId : 3,
           goalStatus : "undone",
-          initialPoint: {x: width*0.45+(width*0.067), y: height*1.12},
-          curvePoints : [{x: width*0.2, y: height*1.1},
-                          {x: width*0.2, y: height*0.92}],
-          targetPoint : {x: width*0.15+(width*0.067), y: height*0.78+(width*0.11)},
+          initialPoint: {x: width*0.45+(width*0.067), y: height*0.68+(width*0.11)},
+          curvePoints : [{x: width*0.15, y: height*0.7},
+                          {x: width*0.15, y: height*0.9}],
+          targetPoint : {x: width*0.15+(width*0.067), y: height*1},
           challenges : [{id : 17, done: true, cordinate:{x: 1, y: 1}}, {id : 18, done: true, cordinate:{x: 1, y: 1}}, {id : 19, done: true},{id : 20, done: true, cordinate:{x: 1, y: 1}}, {id : 21, done: true, cordinate:{x: 1, y: 1}} ],
           challengeDimentions : 0
         },
         {
           goalId : 4,
           goalStatus : "empty",
-          initialPoint: {x: width*0.2+(width*0.067), y: height*0.78},
-          curvePoints : [{x: width*0.53, y: height*0.8},
-                          {x: width*0.65, y: height*0.64}],
-          targetPoint : {x: width*0.5+(width*0.067), y: height*0.5+(width*0.11)},
+          initialPoint: {x: width*0.2+(width*0.067), y: height*1.02+(width*0.11)},
+          curvePoints : [{x: width*0.5, y: height*1.05},
+                          {x: width*0.65, y: height*1.16}],
+          targetPoint : {x: width*0.5+(width*0.067), y: height*1.3},
           challenges : [{id : 18, done: false, cordinate:{x: 1, y: 1}},{id : 18, done: false, cordinate:{x: 1, y: 1}}, {id : 19, done: false},{id : 20, done: false, cordinate:{x: 1, y: 1}}, {id : 21, done: false, cordinate:{x: 1, y: 1}} ],
           challengeDimentions : 0
         },
         {
           goalId : 5,
           goalStatus : "empty",
-          initialPoint: {x: width*0.5+(width*0.067), y: height*0.5},
-          curvePoints : [{x: width*0.25, y: height*0.5},
-                          {x: width*0.2, y: height*0.25}],
-          targetPoint : {x: width*0.4+(width*0.067), y: height*0.16+(width*0.11)},
+          initialPoint: {x: width*0.5+(width*0.067), y: height*1.3+(width*0.11)},
+          curvePoints : [{x: width*0.25, y: height*1.35},
+                          {x: width*0.2, y: height*1.55}],
+          targetPoint : {x: width*0.4+(width*0.067), y: height*1.64},
           challenges : [{id : 18, done: false, cordinate:{x: 1, y: 1}},{id : 17, done: false, cordinate:{x: 1, y: 1}}, {id : 18, done: false, cordinate:{x: 1, y: 1}}, {id : 19, done: false},{id : 20, done: false, cordinate:{x: 1, y: 1}}, {id : 21, done: false, cordinate:{x: 1, y: 1}} ],
           challengeDimentions : 0
         }
@@ -116,7 +116,7 @@ export default class legatiplay extends React.Component {
   setDimentions(x) {
         let challengeDimentions = 0.11*width;
         if(x<6){
-         challengeDimentions = (0.12*width)*(1-(x*0.05))
+         challengeDimentions = (0.1*width)*(1-(x*0.05))
         } else {
          challengeDimentions= (0.085*width)*(1-(x*0.05)) ;
         }
@@ -135,27 +135,33 @@ export default class legatiplay extends React.Component {
   }
   printChallnges(goalNumber){
     return (
-      <View>
+      <View style={{position:'absolute', left:0, bottom:0}}>
         {this.state.goalList[goalNumber].challenges.map((challengePoint, index) => {
           let m = 0
           let challengedimentions = this.state.goalList[goalNumber].challengeDimentions;
          // degreeFinder(this.state.goalList[goalNumber],index,  )
             if(index!== this.state.goalList[goalNumber].challenges.length-1){
-            m =  Math.atan2((this.state.goalList[goalNumber].challenges[index+1].cordinate.y - (challengedimentions*0.2)) - challengePoint.cordinate.y ,
-                                (this.state.goalList[goalNumber].challenges[index+1].cordinate.x - (challengedimentions*0.2)) - challengePoint.cordinate.x) *  180 / Math.PI -110;
+               m =  Math.atan2((this.state.goalList[goalNumber].challenges[index+1].cordinate.y) - challengePoint.cordinate.y,
+                               (this.state.goalList[goalNumber].challenges[index+1].cordinate.x) - challengePoint.cordinate.x) *  180 / Math.PI -60;
           } else {
-            m = 250+ Math.atan2((this.state.goalList[goalNumber].targetPoint.y-20) - challengePoint.cordinate.y ,
-                           (this.state.goalList[goalNumber].targetPoint.x-10) - challengePoint.cordinate.x) *  180 / Math.PI;
+            m = 290+ Math.atan2((this.state.goalList[goalNumber].targetPoint.y) - challengePoint.cordinate.y ,
+                                (this.state.goalList[goalNumber].targetPoint.x-10) - challengePoint.cordinate.x) *  180 / Math.PI;
           }
           if(challengePoint.done==false){
             return (
-                <View style={{transform: [{rotate:`${180+m}deg`}],position : "absolute", height: challengedimentions ,width: challengedimentions, top: challengePoint.cordinate.y, left: challengePoint.cordinate.x}} ><TouchableOpacity key={(1 + index) + (10 * goalNumber)}>
-                <Image style={{height: challengedimentions ,width: challengedimentions}}
-                              source= {require('./img/challenge_gray.png')}/></TouchableOpacity></View>
+                <View style={{transform: [{rotate:`${-m}deg`}],position : "absolute", height: challengedimentions ,width: challengedimentions, bottom: challengePoint.cordinate.y, left: challengePoint.cordinate.x}} >
+                    <TouchableOpacity key={(1 + index) + (10 * goalNumber)}>
+                         <Image style={{height: challengedimentions ,width: challengedimentions}}
+                              source= {require('./img/challenge_gray.png')}/>
+                    </TouchableOpacity>
+                </View>
           )} else{ return(
-              <View style={{transform: [{rotate:`${180+m}deg`}],position : "absolute", height: challengedimentions ,width: challengedimentions, top: challengePoint.cordinate.y, left: challengePoint.cordinate.x}}><TouchableOpacity key={(1 + index) + (10 * goalNumber)}>
-               <Image style={{height: challengedimentions ,width: challengedimentions}}
-                              source= {require('./img/challenge_purple.png')}/></TouchableOpacity></View>
+              <View style={{transform: [{rotate:`${-m}deg`}],position : "absolute", height: challengedimentions ,width: challengedimentions, bottom: challengePoint.cordinate.y, left: challengePoint.cordinate.x}}>
+                <TouchableOpacity key={(1 + index) + (10 * goalNumber)}>
+                  <Image style={{height: challengedimentions ,width: challengedimentions}}
+                              source= {require('./img/challenge_purple.png')}/>
+                </TouchableOpacity>
+              </View>
           )}
          
     })}
@@ -164,7 +170,7 @@ export default class legatiplay extends React.Component {
   } 
   printGoals(goalNumber){
     return (
-      <View>
+      <View style={{position:'absolute', left:0, bottom:0}}>
         {this.state.goalList.map((goal, index) => {
          return (
            <GoalImage key={(index + 1) * 1000} x={goal.targetPoint.x} y={goal.targetPoint.y} imageType={goal.goalStatus} chooseGoal={this._showModal} openGoal={this.openGoal}/>
@@ -250,7 +256,7 @@ export default class legatiplay extends React.Component {
 const styles = StyleSheet.create({
   container: {
     backgroundColor:'#fff',
-    height: height*2 - 70  },
+    height: height*2},
   goal : {
     position : "absolute",
     backgroundColor: 'red',
@@ -270,7 +276,7 @@ const styles = StyleSheet.create({
   },
   backgroundImage: {
     position: "absolute",
-    top:-50,
+    top:0,
     left:0,
     width:"100%",
     height: height*2,
@@ -278,4 +284,4 @@ const styles = StyleSheet.create({
 });
 
 
-AppRegistry.registerComponent('legatiplay', () => niv);
+AppRegistry.registerComponent('legatiplay', () => legatiplay);

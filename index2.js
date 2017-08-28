@@ -109,7 +109,7 @@ export default class ChallengesPage extends React.Component {
 
     chordsWriter(chords, rowBreachEach){
       return(
-         <View style={{flexWrap:'wrap', flex: 1, flexDirection: 'row' ,width:width*0.8, marginTop:width*0.05}}>
+         <View style={{flexWrap:'wrap', flex: 1, flexDirection: 'row' ,width:width*0.8,alignContent:'center'}}>
              {chords.map((bar, index) => {
                if(index === chords.length-1 || Number.isInteger((index+1)/rowBreachEach)) { 
                  return (
@@ -142,7 +142,7 @@ export default class ChallengesPage extends React.Component {
           </View>
           <View style={styles.content}>
               <View style={styles.notes}>
-                  {this.chordsWriter([['A', 'D'],['A', 'B'],['C','G'],['D'], 'F', 'Gm'], 3)}
+                  {this.chordsWriter([['A', 'D'],['A', 'B'],['C','G'],['D'], 'F', 'Gm', 'Gm', 'Gm', 'Gm'], 3)}
                   <View style={styles.iconContainer}>
                     <Image style={{alignSelf:'center', height:31, width:28}} source= {require('./img/purple_note.png')}/>
                   </View>
